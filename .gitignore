@@ -1,0 +1,23 @@
+# Compiled objects, executables, and macOS debug symbols
+*.o
+*.obj
+*.exe
+*.dSYM/
+
+# Generated renders; retain the tracked directory placeholder
+/output/*
+!/output/placeholder
+
+# Profiling output
+/profile*.json
+/profile*.json.gz
+/flamegraph*.svg
+/perf.data*
+/*.trace/
+
+# Local OS/Python caches
+.DS_Store
+__pycache__/
+
+/scripts/pianoroom.sh
+/benchmarks/
