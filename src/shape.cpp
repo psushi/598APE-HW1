@@ -52,18 +52,21 @@ void insertionSort(TimeAndShape *arr, int n) {
 
 void calcColor(unsigned char* toFill,Autonoma* c, Ray ray, unsigned int depth){
    ShapeNode* t = c->listStart;
-  std::vector<TimeAndShape> times;
-  // TODO: Should we use reserve here?
    size_t seen = 0;
+   double curTime = inf;
+   Shape* curShape = NULL;
+   
    while(t!=NULL){
       double time = t->data->getIntersection(ray);
-      times.push_back((TimeAndShape){ time, t->data });
+      if (time < curTime) {
+        curTime = time;
+        curShape = t->data;
+    }
       seen ++;
       t = t->next;
    }
-   insertionSort(times.data(), seen);
-  // times[0].time is an invalid access if seen == 0, but this is fine because || early returns. 
-   if (seen == 0 || times[0].time == inf) {
+
+   if (seen == 0 || curTime == inf) {
       double opacity, reflection, ambient;
       Vector temp = ray.vector.normalize();
       const double x = temp.x;
@@ -73,10 +76,6 @@ void calcColor(unsigned char* toFill,Autonoma* c, Ray ray, unsigned int depth){
       c->skybox->getColor(toFill, &ambient, &opacity, &reflection, fix(angle/M_TWO_PI),fix(me));
       return;
    }
-
-   double curTime = times[0].time;
-   Shape* curShape = times[0].shape;
-   // free(times);
 
    Vector intersect = curTime*ray.vector+ray.point;
    double opacity, reflection, ambient;
