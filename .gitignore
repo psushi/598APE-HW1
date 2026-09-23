@@ -21,4 +21,6 @@ __pycache__/
 
 /scripts/pianoroom.sh
 /scripts/run_pianoroom.sh
+/scripts/globe.sh
+/scripts/run_globe.sh
 /benchmarks/
