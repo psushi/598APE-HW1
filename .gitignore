@@ -24,3 +24,5 @@ __pycache__/
 /scripts/globe.sh
 /scripts/run_globe.sh
 /benchmarks/
+report.typ
+report.pdf
